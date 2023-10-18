@@ -18,7 +18,7 @@ app.post('/chat', async (req, res) => {
         const jsonData = req.body;
 
         // Чтение файла
-        const data = await fs.readFile('db.json', 'utf8');
+        const data = await fs.readFile('./json/db.json', 'utf8');
         // Парсинг данных из файла
         let existingData = [];
         if (data) {
@@ -42,11 +42,30 @@ app.post('/chat', async (req, res) => {
 app.get('/', async (req, res) => {
     // Чтение данных из файла db.json
     try {
-        const data = await fs.readFile('db.json', 'utf8');
+        const data = await fs.readFile('./json/db.json', 'utf8');
         if(data){
             res.json(data);
+        }else{
+            res.json(null);
         }
-        res.json(null)
+    } catch (error) {
+        console.error('Ошибка при обработке запроса:', error);
+        res.status(500).json({ error: 'Ошибка при обработке запроса' });
+    }
+});
+app.post('/login', async (req, res) => {
+    try {
+        const reqData = req.body;
+        const userDb = await fs.readFile('./json/user.json', 'utf8');
+        const arrayUserDb = JSON.parse(userDb);
+
+        const user = arrayUserDb.find(item => item.userLogin === reqData.userLogin && item.userPassword === reqData.userPassword);
+        if (user) {
+            console.log(`Пользователь ${user.userLogin} вошел в систему`);
+            res.json({ success: true });
+        } else {
+            res.json({ success: false });
+        }
     } catch (error) {
         console.error('Ошибка при обработке запроса:', error);
         res.status(500).json({ error: 'Ошибка при обработке запроса' });
