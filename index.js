@@ -34,11 +34,12 @@ app.post("/registration", registrationValidator, UserControler.registration);
 app.post("/login", loginValidator, UserControler.login);
 app.get("/me", checkMe, UserControler.getMe);
 
-//app.get("/message", MessageController.getAll);
+app.get("/message", MessageController.getAll);
 //app.get("/message/:id", MessageController.getOne);
-app.post("/message",checkMe, messageValidator, MessageController.create);
+app.post("/message", checkMe, messageValidator, MessageController.create);
 //app.delete("/message", MessageController.remove);
 //app.patch("/message", MessageController.update);
+
 // Запуск сервера на порте 3000
 app.listen(PORT, () => {
   console.log("Сервер запущен на порте: ", PORT);
