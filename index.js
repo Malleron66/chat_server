@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 dotenv.config();
 app.use(cors());
-
+//test
 const PORT = process.env.PORT;
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD;
