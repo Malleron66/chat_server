@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 dotenv.config();
 app.use(cors());
-//test3
+
 const PORT = process.env.PORT;
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD;
@@ -37,6 +37,7 @@ app.get("/message", MessageController.getAll);
 app.post("/message", checkMe, messageValidator, MessageController.create);
 app.delete("/message", checkMe, MessageController.remove);
 app.patch("/message", checkMe, messageValidator, MessageController.update);
+app.post('/save-language', UserControler.setUserLanguage);
 
 // Запуск сервера на порте 3000
 app.listen(PORT, () => {

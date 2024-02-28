@@ -18,8 +18,12 @@ export const registration = async (req, res) => {
     const user = await UserModel.create({
       email: req.body.email,
       fullName: req.body.fullName,
-      avatarUrl: req.body.avatarUrl,
       passwoldHash: hash,
+      avatar: req.body.avatar,
+      race: req.body.race,
+      gender: req.body.gender,
+      attributes: req.body.attributes,
+
     });
     // //Заносим юзера в базу
     // const user = await doc.save();
@@ -90,5 +94,22 @@ export const getMe = async (req, res) => {
   } catch (error) {
     console.error("Ошибка при обработке запроса:", error);
     res.status(500).json({ error: "Ошибка при обработке запроса" });
+  }
+};
+export const setUserLanguage = async (req, res) => {
+  const { userId, language } = req.body;
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'Пользователь не найден' });
+    }
+
+    user.language = language;
+    await user.save();
+
+    return res.status(200).json({ success: true, message: 'Язык пользователя успешно обновлен' });
+  } catch (error) {
+    console.error('Ошибка при обновлении языка пользователя:', error);
+    return res.status(500).json({ success: false, message: 'Произошла ошибка при обновлении языка пользователя' });
   }
 };
