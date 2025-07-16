@@ -19,8 +19,8 @@ const DB_NAME = process.env.DB_NAME;
 
 mongoose
   .connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@progectchat.qu1dg44.mongodb.net/${DB_NAME}`)
-  .then(() => console.log("DB ok"))
-  .catch((err) => console.log("DB error", err));
+  .then(() => console.log("✅ Успешно подключено к MongoDB Atlas через Mongoose"))
+  .catch((err) => console.log("❌ Ошибка подключения:", err.message));
 
 // Разрешить запросы с определенного источника
 app.use((req, res, next) => {
