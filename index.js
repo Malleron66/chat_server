@@ -5,7 +5,7 @@ import { registrationValidator, loginValidator, messageValidator} from "./valida
 import checkMe from "./util/checkMe.js";
 import * as UserControler from './controllers/UserController.js';
 import * as MessageController from './controllers/MessageController.js';
-import * as QueenController from './controllers/QueenController.js';
+import * as AssistantController from './controllers/AssistantController.js';
 import cors from 'cors';
 
 const app = express();
@@ -40,7 +40,7 @@ app.delete("/message", checkMe, MessageController.remove);
 app.patch("/message", checkMe, messageValidator, MessageController.update);
 app.post('/save-language', UserControler.setUserLanguage);
 
-app.post("/ai/qwen", checkMe, QueenController.askQwen);
+app.post("/ai/assistant", checkMe, AssistantController.askAssistant);
 
 // Запуск сервера на порте 3000
 app.listen(PORT, () => {
