@@ -33,8 +33,8 @@ const UserShema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // 👑 Привязка квин к пользователю
-    queen: {
+    // 👑 Привязка ассистента к пользователю
+    assistantName: {
       type: String,
       required: false,
     },
@@ -94,10 +94,10 @@ const UserShema = new mongoose.Schema(
   }
 );
 
-// 👑 Автоматически присваиваем имя квин перед сохранением пользователя
+// 👑 Автоматически присваиваем имя ассистента перед сохранением пользователя
 UserShema.pre('save', function(next) {
-  if (!this.queen && this.fullName) {
-    this.queen = `${this.fullName.toLowerCase()}_quin`;
+  if (!this.assistantName && this.fullName) {
+    this.assistantName = `${this.fullName.toLowerCase()}_assistant`;
   }
   next();
 });

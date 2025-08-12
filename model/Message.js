@@ -20,11 +20,11 @@ const MessageShema = new mongoose.Schema({
     },
     sender: {
         type: String,
-        enum: ['user', 'queen'],
+        enum: ['user', 'assistant'],
         default: 'user',
         required: true,
     },
-    queenName: {
+    assistantName: {
         type: String,
         required: false,
     }
