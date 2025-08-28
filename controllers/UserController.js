@@ -20,13 +20,8 @@ export const registration = async (req, res) => {
       fullName: req.body.fullName,
       passwoldHash: hash,
       avatar: req.body.avatar,
-      race: req.body.race,
-      gender: req.body.gender,
-      attributes: req.body.attributes,
-
     });
     // //Заносим юзера в базу
-    // const user = await doc.save();
     //Генерируем токен
     const token = jwt.sign(
       {
